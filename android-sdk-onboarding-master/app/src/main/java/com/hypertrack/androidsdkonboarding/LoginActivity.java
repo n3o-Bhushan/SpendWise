@@ -18,7 +18,13 @@ import com.hypertrack.lib.callbacks.HyperTrackCallback;
 import com.hypertrack.lib.models.ErrorResponse;
 import com.hypertrack.lib.models.SuccessResponse;
 import com.hypertrack.lib.models.User;
-
+import com.nexosis.impl.NexosisClient;
+import com.nexosis.model.Columns;
+import com.nexosis.model.DataRole;
+import com.nexosis.model.DataSetData;
+import com.nexosis.model.DataSetList;
+import com.nexosis.model.DataType;
+import com.nexosis.model.ResultInterval;
 
 
 ///Vimanyu///
@@ -37,6 +43,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.apache.http.entity.StringEntity;
+import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,11 +51,16 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static android.R.id.message;
@@ -271,6 +283,51 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
+    public static Map<String, String> jsonToMap(JSONObject json) throws JSONException {
+        Map<String, String> retMap = new HashMap<String, String>();
+
+        if(json != JSONObject.NULL) {
+            retMap = toMap(json);
+        }
+        return retMap;
+    }
+
+    public static Map<String, String> toMap(JSONObject object) throws JSONException {
+        Map<String, String> map = new HashMap<String, String>();
+
+        Iterator<String> keysItr = object.keys();
+        while(keysItr.hasNext()) {
+            String key = keysItr.next();
+            Object value = object.get(key);
+
+            if(value instanceof JSONArray) {
+                value = toList((JSONArray) value);
+            }
+
+            else if(value instanceof JSONObject) {
+                value = toMap((JSONObject) value);
+            }
+            map.put(key, value.toString());
+        }
+        return map;
+    }
+
+    public static List<Object> toList(JSONArray array) throws JSONException {
+        List<Object> list = new ArrayList<Object>();
+        for(int i = 0; i < array.length(); i++) {
+            Object value = array.get(i);
+            if(value instanceof JSONArray) {
+                value = toList((JSONArray) value);
+            }
+
+            else if(value instanceof JSONObject) {
+                value = toMap((JSONObject) value);
+            }
+            list.add(value);
+        }
+        return list;
+    }
+
     public void CitiAuth()throws Exception {
 
         CloseableHttpClient httpClient = null;
@@ -318,7 +375,7 @@ public class LoginActivity extends BaseActivity {
         public static void getCitiData() throws Exception {
             final OkHttpClient client = new OkHttpClient();
             final Request request = new Request.Builder()
-                    .url("https://sandbox.apihub.citi.com/gcb/api/v2/accounts").addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4X_ui19PhL8VuKmwmplYaIzH0oaXHCytm2CdbccBHVVq1N5L0G98gUhQNngj4BpXnWg8WSwMG8kLt12kAM-xT4rQVCBnsqogIzGiMRuqt6XLUF7L19_0aCOru25gu-9zgW6omiGXEOXLHmqGmSCa7P38uhwQXL70YbjijKpZV4cprhUqU-Hu53mQt3ThOAVpjCK3VQ4S5_irwDBNemYx03g").addHeader("Accept", "application/json").addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748").addHeader("uuid","d0c7da2a-7ade-4c32-806f-f5bff5ccff09").build();
+                    .url("https://sandbox.apihub.citi.com/gcb/api/v2/accounts").addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4vk0jB0JFHoUUZ0ANjoAkXO_dbJWsev-rx0j7vtVKvnucu_Jl19Je9YhOxtnxTjfTuPKR44Re_V7ee8tvbGk9fRDirhXDPqLPTMSCk44dPPlajC5EcwawSE6gJDGlYy1lYzBsU3Zy7gij48QMulZQ3jZQ59VzonGch5pHy_wlc2b1RZ-DCQjtJ7g1p4tu_Nemeykj7JKGDACoipVeYB-FOg").addHeader("Accept", "application/json").addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748").addHeader("uuid","d0c7da2a-7ade-4c32-806f-f5bff5ccff09").build();
 
             //proxy configuration
             //request.setConfig(config);
@@ -386,7 +443,7 @@ public class LoginActivity extends BaseActivity {
             Log.d("TEST",accountId[0]);
 
             final Request request_transaction = new Request.Builder()
-                    .url("https://sandbox.apihub.citi.com/gcb/api/v2/accounts/"+accountId[0]+"/transactions?transactionStatus=ALL&requestSize=1000&transactionFromDate=2017-01-01&transactionToDate=2017-03-01").addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4X_ui19PhL8VuKmwmplYaIzH0oaXHCytm2CdbccBHVVq1N5L0G98gUhQNngj4BpXnWg8WSwMG8kLt12kAM-xT4rQVCBnsqogIzGiMRuqt6XLUF7L19_0aCOru25gu-9zgW6omiGXEOXLHmqGmSCa7P38uhwQXL70YbjijKpZV4cprhUqU-Hu53mQt3ThOAVpjCK3VQ4S5_irwDBNemYx03g").addHeader("Accept", "application/json").addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748").addHeader("uuid","d0c7da2a-7ade-4c32-806f-f5bff5ccff09").build();
+                    .url("https://sandbox.apihub.citi.com/gcb/api/v2/accounts/"+accountId[0]+"/transactions?transactionStatus=ALL&requestSize=1000&transactionFromDate=2017-01-01&transactionToDate=2017-03-01").addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4vk0jB0JFHoUUZ0ANjoAkXO_dbJWsev-rx0j7vtVKvnucu_Jl19Je9YhOxtnxTjfTuPKR44Re_V7ee8tvbGk9fRDirhXDPqLPTMSCk44dPPlajC5EcwawSE6gJDGlYy1lYzBsU3Zy7gij48QMulZQ3jZQ59VzonGch5pHy_wlc2b1RZ-DCQjtJ7g1p4tu_Nemeykj7JKGDACoipVeYB-FOg").addHeader("Accept", "application/json").addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748").addHeader("uuid","d0c7da2a-7ade-4c32-806f-f5bff5ccff09").build();
 
             //HttpGet request = new HttpGet("https://sandbox.apihub.citi.com/gcb/api/v2/accounts/"+accountId+"/transactions?transactionStatus=ALL&requestSize=1000&transactionFromDate=2017-01-01&transactionToDate=2017-03-01");
 
@@ -464,39 +521,38 @@ public class LoginActivity extends BaseActivity {
             HashMap<String,Integer> transactionDateMap = new HashMap();
             int counter = 0;
 //		int accountID = 1;
-            for(int i = 0; i< transactionList.length(); i++){
+            for(int i = 0; i< transactionList.length(); i++) {
                 if ((transactionList.getJSONObject(i).get("merchantDescription")).toString().toLowerCase().contains("food")
                         || (transactionList.getJSONObject(i).get("merchantDescription")).toString().toLowerCase().contains("restaurant")
                         || (transactionList.getJSONObject(i).get("merchantDescription")).toString().toLowerCase().contains("eating")
                         ) {
-                    if(transactionDateMap.containsKey(transactionList.getJSONObject(i).get("transactionDate").toString())) {
-                    //    Iterator<JSONObject> iter2 = foodData.iterator();
+                    if (transactionDateMap.containsKey(transactionList.getJSONObject(i).get("transactionDate").toString())) {
+                        //    Iterator<JSONObject> iter2 = foodData.iterator();
                         int transaction_index = transactionDateMap.get(transactionList.getJSONObject(i).get("transactionDate").toString());
-                        Log.d("Transaction INDEX",Integer.toString(transaction_index));
-                        Log.d("TARGET_JSONOBJ",foodData.getJSONObject(transaction_index).toString());
+                        Log.d("Transaction INDEX", Integer.toString(transaction_index));
+                        Log.d("TARGET_JSONOBJ", foodData.getJSONObject(transaction_index).toString());
                         double old_value = Double.parseDouble(foodData.getJSONObject(transaction_index).get("food").toString());
-                        Log.d("OLD_VALUE",Double.toString(old_value));
+                        Log.d("OLD_VALUE", Double.toString(old_value));
                         double new_value = Double.parseDouble(transactionList.getJSONObject(i).get("transactionAmount").toString());
-                        Log.d("NEW_VALUE",Double.toString(new_value));
+                        Log.d("NEW_VALUE", Double.toString(new_value));
 
-                        foodData.getJSONObject(transaction_index).put("food",old_value+new_value);
+                        foodData.getJSONObject(transaction_index).put("food", old_value + new_value);
 
-                        foodData.getJSONObject(transaction_index).put("balance",transactionList.getJSONObject(i).get("runningBalanceAmount"));
+                        foodData.getJSONObject(transaction_index).put("balance", transactionList.getJSONObject(i).get("runningBalanceAmount"));
 
 
 //                        foodData.getJSONObject(transactionDateMap.get(transactionList.getJSONObject(i).get("transactionDate").toString())).put(foodData.getJSONObject(transactionDateMap.get(transactionList.getJSONObject(i))).get("food").toString(),Integer.parseInt(foodData.getJSONObject(transactionDateMap.get(transactionList.getJSONObject(i))).get("food").toString())
 //                                +Integer.parseInt(transactionList.getJSONObject(i).get("transactionAmount").toString()));
 
-                      //  iter2.get("food").put(iter2.get("food")+iter.get("transactionAmount"));
-                     //s   iter2.get("balance").put(iter.get("runningBalanceAmount"));
+                        //  iter2.get("food").put(iter2.get("food")+iter.get("transactionAmount"));
+                        //s   iter2.get("balance").put(iter.get("runningBalanceAmount"));
 
-                    }
-                    else {
+                    } else {
                         JSONObject entry = new JSONObject();
-                        entry.put("timeStamp",transactionList.getJSONObject(i).get("transactionDate"));
+                        entry.put("timeStamp", transactionList.getJSONObject(i).get("transactionDate"));
                         transactionDateMap.put(transactionList.getJSONObject(i).get("transactionDate").toString(), counter++);
                         entry.put("food", transactionList.getJSONObject(i).get("transactionAmount"));
-                        entry.put("balance",transactionList.getJSONObject(i).get("runningBalanceAmount"));
+                        entry.put("balance", transactionList.getJSONObject(i).get("runningBalanceAmount"));
 
 
                         foodData.put(entry);
@@ -504,7 +560,6 @@ public class LoginActivity extends BaseActivity {
 
                 }
             }
-
 
             JSONObject customerWiseFoodData = new JSONObject();
             customerWiseFoodData.put("customerID",Integer.parseInt(accountId[0]));
@@ -514,11 +569,82 @@ public class LoginActivity extends BaseActivity {
             Log.d("wadded", customerWiseFoodData.toString());
 
 
+//            NexosisClient nexClient = new NexosisClient("fd9e02a6c5a94e56b9a9f56b520956fc","https://ml.nexosis.com/v1/");
+//
+//            List<Map<String,String>> foodData_list = new ArrayList();
+//
+//            if(foodData != null){
+//                for (int i=0;i<foodData.length();i++){
+//                    Map<String,String> jMap = jsonToMap(foodData.getJSONObject(i));
+//                    foodData_list.add(jMap);
+//                }
+//            }
+//
+//            DataSetData dataSet = new DataSetData();
+//            dataSet.setData(foodData_list);
+//
+//            Columns cols = new Columns();
+//            cols.setColumnMetadata("timeStamp", DataType.DATE, DataRole.TIMESTAMP);
+//            cols.setColumnMetadata("food", DataType.NUMERIC, DataRole.TARGET);
+//            cols.setColumnMetadata("balance", DataType.NUMERIC, DataRole.FEATURE);
+//            dataSet.setColumns(cols);
+//
+            String dataSetName = "CitiDataSet";
+//
+//            nexClient.getDataSets().create(dataSetName, dataSet);
+//
+//            DataSetList list = nexClient.getDataSets().list();
+//
+//            nexClient.getSessions().createForecast(
+//                    "OtherDataSet",
+//                    "food",
+//                    DateTime.parse("2017-03-25T0:00:00Z"),
+//                    DateTime.parse("2017-04-24T0:00:00Z"),
+//                    ResultInterval.DAY
+//            );
+
+            JSONObject jsonBody = new JSONObject();
+            JSONObject timestampJSON = new JSONObject();
+
+            timestampJSON.put("dataType","date");
+            timestampJSON.put("role","timestamp");
+
+            JSONObject salesJSON = new JSONObject();
+            salesJSON.put("dataType","numeric");
+            salesJSON.put("role","target");
+
+            JSONObject balanceJSON = new JSONObject();
+            balanceJSON.put("dataType","numeric");
+            balanceJSON.put("role","none");
+
+            JSONObject dataJSON  = new JSONObject();
+            dataJSON.put("data", foodData);
+
+            JSONObject columnJSON = new JSONObject();
+
+            columnJSON.put("timeStamp",timestampJSON);
+            columnJSON.put("food",salesJSON);
+            columnJSON.put("balance",balanceJSON);
+            jsonBody.put("column",columnJSON);
+            jsonBody.put("data",dataJSON);
+
+//            jsonBody.put("column","timestamp");
+            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+            RequestBody body = RequestBody.create(JSON, jsonBody.toString());
+
+            final OkHttpClient nexosisClient = new OkHttpClient();
+            Request request2Nexosis = new Request.Builder()
+                                        .url("https://ml.nexosis.com/v1/data/dataSetName")
+                                        .put(body)
+                                        .addHeader("api-key","fd9e02a6c5a94e56b9a9f56b520956fc")
+                                        .build();
+            
 
 
 
 
-             }
+
+        }
 
 
 
