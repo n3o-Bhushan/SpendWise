@@ -265,7 +265,7 @@ public class LoginActivity extends BaseActivity {
             //proxy configuration
             //request.setConfig(config);
             // Header parameters  addition
-            request.addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ42yltRnydE-6THSuhNezlqCqq0dYlBzUWcadJ5J-iJnz3pFNZVvXN_4LSt2gqjxT-vrKGRvGOLB-gexOhe_jgqykdRTWavcIUDLG6v35r5IYVtSQG2spAnKHLrkZ_2UmkKan8RjUuug73C7YztKoOAhtQZB5f3IOWLIgSHt06jXvsUku59eSO05A8zrEbyBdLAfFGPZtjPcnZSb9sOE7olw");
+            request.addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4Iu84h6A-eXyyGKgGvvUAvC5HDlV7ue_tcIXd_Z5x6HjUCofZLMRhgXmnSYi9tH7w8zeZzGsFxe_6uwyNPc2TACk9lbesHcOXDbox91GoXkV0YihcJaXe9vTHXN7yyjPiGlxo86a02hRWBZtDjoQ0FjSomZdwEwgZkex8BN2kgrb8OyMjs50hiHHIGm4MgAw0lo5oiscoop9EN2vO4RF_-Q");
             request.addHeader("Accept", "application/json");
             request.addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748");
 
