@@ -42,6 +42,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -316,7 +318,7 @@ public class LoginActivity extends BaseActivity {
         public static void getCitiData() throws Exception {
             final OkHttpClient client = new OkHttpClient();
             final Request request = new Request.Builder()
-                    .url("https://sandbox.apihub.citi.com/gcb/api/v2/accounts").addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4jGSpN1Jjr2CeafOQJmQvPLdYgmwUc28GLNpKN8-P7m1Pr1dmvoD7uz4tzvUYecezaSxFqIrrfqHkw36OebGsE3JVI_EBlbIAH4E1JuvDIN2wizn-wUEztnQ4BEt8-IujrQJXRn6uZlJI3SKEiVz6J6qc9JBnApbYCaK7gM_-OldA25jEA3Q6xQzIkJvKr6op_tk4LmONnmKnFff8yStuNw").addHeader("Accept", "application/json").addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748").addHeader("uuid","d0c7da2a-7ade-4c32-806f-f5bff5ccff09").build();
+                    .url("https://sandbox.apihub.citi.com/gcb/api/v2/accounts").addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4McgVkrSeT25MBEu9mlD63bF-D56jHFnf8aZ14t51CQoU2-Epjl-Pq9-QFz_FAvGuDMdEuQyI99J4lMQEgri0kiUj1yBp6hDHao36Z2NlQRucdIrM6Q6Pj88F8uLY87EFJmbOy-Ut5o0vtoMdqO-2giHg3h8FLl0T3OkRZS3PiCneZU_IXgqIDq24PbFyifqMhN0cVRGylN2t8Lec0x57RQ").addHeader("Accept", "application/json").addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748").addHeader("uuid","d0c7da2a-7ade-4c32-806f-f5bff5ccff09").build();
 
             //proxy configuration
             //request.setConfig(config);
@@ -382,7 +384,133 @@ public class LoginActivity extends BaseActivity {
                 //do nothing
             }
             Log.d("TEST",accountId[0]);
+
+            final Request request_transaction = new Request.Builder()
+                    .url("https://sandbox.apihub.citi.com/gcb/api/v2/accounts/"+accountId[0]+"/transactions?transactionStatus=ALL&requestSize=1000&transactionFromDate=2017-01-01&transactionToDate=2017-03-01").addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4McgVkrSeT25MBEu9mlD63bF-D56jHFnf8aZ14t51CQoU2-Epjl-Pq9-QFz_FAvGuDMdEuQyI99J4lMQEgri0kiUj1yBp6hDHao36Z2NlQRucdIrM6Q6Pj88F8uLY87EFJmbOy-Ut5o0vtoMdqO-2giHg3h8FLl0T3OkRZS3PiCneZU_IXgqIDq24PbFyifqMhN0cVRGylN2t8Lec0x57RQ").addHeader("Accept", "application/json").addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748").addHeader("uuid","d0c7da2a-7ade-4c32-806f-f5bff5ccff09").build();
+
+            //HttpGet request = new HttpGet("https://sandbox.apihub.citi.com/gcb/api/v2/accounts/"+accountId+"/transactions?transactionStatus=ALL&requestSize=1000&transactionFromDate=2017-01-01&transactionToDate=2017-03-01");
+
+            //proxy configuration
+            //request.setConfig(config);
+            // Header parameters  addition
+//        	request.addHeader("Authorization", "Bearer {replace with access_token}");
+//        	request.addHeader("uuid", "f97c7685-9562-480c-a6d1-6919f941863b");
+//        	request.addHeader("Accept", "application/json");
+//        	request.addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748");
+
+
+            final JSONObject[] Jobject_transaction = {null};
+            final Boolean[] flag_transaction = {false};
+            client.newCall(request_transaction).enqueue( new Callback() {
+                                                 @Override
+                                                 public void onFailure(Call call, IOException e) {
+
+                                                 }
+
+                                                 @Override
+                                                 public void onResponse(Call call, Response response) throws IOException {
+                                                     resp[0] =response.body().string();
+
+
+                                                     try {
+                                                         Jobject_transaction[0] = new JSONObject(resp[0]);
+                                                         flag_transaction[0]=true;
+                                                     } catch (JSONException e) {
+                                                         e.printStackTrace();
+                                                     }
+
+
+                                                     //   System.out.print("***************************");
+                                                     Log.d("wadded", "**************TRANSACTION_DATA*******************");
+                                                     Log.d("wadded", resp[0]);
+//                                                     try {
+//                                                         //   Jobject[0] = new JSONObject(resp[0]);
+//                                                         //    Jarray[0] = Jobject[0].getJSONArray("accountGroupSummary");
+//
+//                                                         JSONObject Jobject = new JSONObject(resp[0]);
+//                                                         JSONArray Jarray = Jobject.getJSONArray("accountGroupSummary");
+//
+//                                                         JSONObject object     = Jarray.getJSONObject(0);
+//                                                         JSONArray Jarray1 = object.getJSONArray("creditCardAccountsSummary");
+//                                                         JSONObject object1     = Jarray1.getJSONObject(0);
+//
+//
+//
+//                                                         Log.d("wadded", "*****************JSONOBJ****************");
+//                                                         accountId[0] = object1.get("accountId").toString();
+//                                                         Log.d("wadded", accountId[0]);
+//                                                         flag[0] =true;
+//
+//
+//                                                     } catch (JSONException e1) {
+//                                                         e1.printStackTrace();
+//                                                     }
+
+                                                 }
+
+                                             }
+            );
+
+            while(flag_transaction[0]==false){
+                //do nothing
+
+            }
+
+
+            JSONArray transactionList = (JSONArray) Jobject_transaction[0].get("creditCardAccountTransactions");
+
+
+            JSONArray foodData = new JSONArray();
+            HashMap<String,Integer> transactionDateMap = new HashMap();
+            int counter = 0;
+//		int accountID = 1;
+            for(int i = 0; i<= transactionList.length(); i++){
+                if ((transactionList.getJSONObject(i).get("merchantDescription")).toString().toLowerCase().contains("food")
+                        || (transactionList.getJSONObject(i).get("merchantDescription")).toString().toLowerCase().contains("restaurant")
+                        || (transactionList.getJSONObject(i).get("merchantDescription")).toString().toLowerCase().contains("eating")
+                        ) {
+                    if(transactionDateMap.containsKey(transactionList.getJSONObject(i).get("transactionDate").toString())) {
+                    //    Iterator<JSONObject> iter2 = foodData.iterator();
+//                        int transaction_index = transactionDateMap.get(transactionList.getJSONObject(i));
+                        foodData.getJSONObject(transactionDateMap.get(transactionList.getJSONObject(i).get("transactionDate").toString())).put(foodData.getJSONObject(transactionDateMap.get(transactionList.getJSONObject(i))).get("food").toString(),Integer.parseInt(foodData.getJSONObject(transactionDateMap.get(transactionList.getJSONObject(i))).get("food").toString())
+                                +Integer.parseInt(transactionList.getJSONObject(i).get("transactionAmount").toString()));
+
+                      //  iter2.get("food").put(iter2.get("food")+iter.get("transactionAmount"));
+                     //s   iter2.get("balance").put(iter.get("runningBalanceAmount"));
+
+                    }
+                    else {
+                        JSONObject entry = new JSONObject();
+                        entry.put("timeStamp",transactionList.getJSONObject(i).get("transactionDate"));
+                        transactionDateMap.put(transactionList.getJSONObject(i).get("transactionDate").toString(), counter++);
+                        entry.put("food","transactionAmount");
+                        entry.put("balance","runningBalanceAmount");
+
+
+                        foodData.put(entry);
+                    }
+
+                }
+            }
+
+
+            JSONObject customerWiseFoodData = new JSONObject();
+            customerWiseFoodData.put("customerID",Integer.parseInt(accountId[0]));
+            customerWiseFoodData.put("foodData",foodData);
+
+            Log.d("wadded", "**************FOOD_DATA*******************");
+            Log.d("wadded", customerWiseFoodData.toString());
+
+
+
+
+
+
              }
+
+
+
+
 
         }
 
