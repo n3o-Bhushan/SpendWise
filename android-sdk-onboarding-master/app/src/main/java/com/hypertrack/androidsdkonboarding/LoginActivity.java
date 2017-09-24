@@ -287,7 +287,7 @@ public class LoginActivity extends BaseActivity {
             //proxy configuration
             //request.setConfig(config);
             // Header parameters  addition
-            request.addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4Vy96H0EAYtJSb9z8-xbxPs70NxFyp0UpVoh7mhstt47mKXqXRlRt0uUKpJb3hryMdBvCS25QXFnymZ90t-oswm-8fDppZqr_wSOmaump1eYeFCeNErfD1hSAfvc5qR7MxmFkd6HmmoJTHugZ7sbm4tFg4OHG8PIrA97gss4zD5xX4YaalKUJU1nAJN7m7sl-4H5VDEX9wyYlPLAL7IVvhg");
+            request.addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4X_ui19PhL8VuKmwmplYaIzH0oaXHCytm2CdbccBHVVq1N5L0G98gUhQNngj4BpXnWg8WSwMG8kLt12kAM-xT4rQVCBnsqogIzGiMRuqt6XLUF7L19_0aCOru25gu-9zgW6omiGXEOXLHmqGmSCa7P38uhwQXL70YbjijKpZV4cprhUqU-Hu53mQt3ThOAVpjCK3VQ4S5_irwDBNemYx03g");
             request.addHeader("Accept", "application/json");
             request.addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748");
          //   request.addHeader("uuid","4c4a2900-71f5-4209-bd44-dc74d1f3890f");
@@ -318,7 +318,7 @@ public class LoginActivity extends BaseActivity {
         public static void getCitiData() throws Exception {
             final OkHttpClient client = new OkHttpClient();
             final Request request = new Request.Builder()
-                    .url("https://sandbox.apihub.citi.com/gcb/api/v2/accounts").addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4McgVkrSeT25MBEu9mlD63bF-D56jHFnf8aZ14t51CQoU2-Epjl-Pq9-QFz_FAvGuDMdEuQyI99J4lMQEgri0kiUj1yBp6hDHao36Z2NlQRucdIrM6Q6Pj88F8uLY87EFJmbOy-Ut5o0vtoMdqO-2giHg3h8FLl0T3OkRZS3PiCneZU_IXgqIDq24PbFyifqMhN0cVRGylN2t8Lec0x57RQ").addHeader("Accept", "application/json").addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748").addHeader("uuid","d0c7da2a-7ade-4c32-806f-f5bff5ccff09").build();
+                    .url("https://sandbox.apihub.citi.com/gcb/api/v2/accounts").addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4X_ui19PhL8VuKmwmplYaIzH0oaXHCytm2CdbccBHVVq1N5L0G98gUhQNngj4BpXnWg8WSwMG8kLt12kAM-xT4rQVCBnsqogIzGiMRuqt6XLUF7L19_0aCOru25gu-9zgW6omiGXEOXLHmqGmSCa7P38uhwQXL70YbjijKpZV4cprhUqU-Hu53mQt3ThOAVpjCK3VQ4S5_irwDBNemYx03g").addHeader("Accept", "application/json").addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748").addHeader("uuid","d0c7da2a-7ade-4c32-806f-f5bff5ccff09").build();
 
             //proxy configuration
             //request.setConfig(config);
@@ -386,7 +386,7 @@ public class LoginActivity extends BaseActivity {
             Log.d("TEST",accountId[0]);
 
             final Request request_transaction = new Request.Builder()
-                    .url("https://sandbox.apihub.citi.com/gcb/api/v2/accounts/"+accountId[0]+"/transactions?transactionStatus=ALL&requestSize=1000&transactionFromDate=2017-01-01&transactionToDate=2017-03-01").addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4McgVkrSeT25MBEu9mlD63bF-D56jHFnf8aZ14t51CQoU2-Epjl-Pq9-QFz_FAvGuDMdEuQyI99J4lMQEgri0kiUj1yBp6hDHao36Z2NlQRucdIrM6Q6Pj88F8uLY87EFJmbOy-Ut5o0vtoMdqO-2giHg3h8FLl0T3OkRZS3PiCneZU_IXgqIDq24PbFyifqMhN0cVRGylN2t8Lec0x57RQ").addHeader("Accept", "application/json").addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748").addHeader("uuid","d0c7da2a-7ade-4c32-806f-f5bff5ccff09").build();
+                    .url("https://sandbox.apihub.citi.com/gcb/api/v2/accounts/"+accountId[0]+"/transactions?transactionStatus=ALL&requestSize=1000&transactionFromDate=2017-01-01&transactionToDate=2017-03-01").addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4X_ui19PhL8VuKmwmplYaIzH0oaXHCytm2CdbccBHVVq1N5L0G98gUhQNngj4BpXnWg8WSwMG8kLt12kAM-xT4rQVCBnsqogIzGiMRuqt6XLUF7L19_0aCOru25gu-9zgW6omiGXEOXLHmqGmSCa7P38uhwQXL70YbjijKpZV4cprhUqU-Hu53mQt3ThOAVpjCK3VQ4S5_irwDBNemYx03g").addHeader("Accept", "application/json").addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748").addHeader("uuid","d0c7da2a-7ade-4c32-806f-f5bff5ccff09").build();
 
             //HttpGet request = new HttpGet("https://sandbox.apihub.citi.com/gcb/api/v2/accounts/"+accountId+"/transactions?transactionStatus=ALL&requestSize=1000&transactionFromDate=2017-01-01&transactionToDate=2017-03-01");
 
@@ -464,16 +464,28 @@ public class LoginActivity extends BaseActivity {
             HashMap<String,Integer> transactionDateMap = new HashMap();
             int counter = 0;
 //		int accountID = 1;
-            for(int i = 0; i<= transactionList.length(); i++){
+            for(int i = 0; i< transactionList.length(); i++){
                 if ((transactionList.getJSONObject(i).get("merchantDescription")).toString().toLowerCase().contains("food")
                         || (transactionList.getJSONObject(i).get("merchantDescription")).toString().toLowerCase().contains("restaurant")
                         || (transactionList.getJSONObject(i).get("merchantDescription")).toString().toLowerCase().contains("eating")
                         ) {
                     if(transactionDateMap.containsKey(transactionList.getJSONObject(i).get("transactionDate").toString())) {
                     //    Iterator<JSONObject> iter2 = foodData.iterator();
-//                        int transaction_index = transactionDateMap.get(transactionList.getJSONObject(i));
-                        foodData.getJSONObject(transactionDateMap.get(transactionList.getJSONObject(i).get("transactionDate").toString())).put(foodData.getJSONObject(transactionDateMap.get(transactionList.getJSONObject(i))).get("food").toString(),Integer.parseInt(foodData.getJSONObject(transactionDateMap.get(transactionList.getJSONObject(i))).get("food").toString())
-                                +Integer.parseInt(transactionList.getJSONObject(i).get("transactionAmount").toString()));
+                        int transaction_index = transactionDateMap.get(transactionList.getJSONObject(i).get("transactionDate").toString());
+                        Log.d("Transaction INDEX",Integer.toString(transaction_index));
+                        Log.d("TARGET_JSONOBJ",foodData.getJSONObject(transaction_index).toString());
+                        double old_value = Double.parseDouble(foodData.getJSONObject(transaction_index).get("food").toString());
+                        Log.d("OLD_VALUE",Double.toString(old_value));
+                        double new_value = Double.parseDouble(transactionList.getJSONObject(i).get("transactionAmount").toString());
+                        Log.d("NEW_VALUE",Double.toString(new_value));
+
+                        foodData.getJSONObject(transaction_index).put("food",old_value+new_value);
+
+                        foodData.getJSONObject(transaction_index).put("balance",transactionList.getJSONObject(i).get("runningBalanceAmount"));
+
+
+//                        foodData.getJSONObject(transactionDateMap.get(transactionList.getJSONObject(i).get("transactionDate").toString())).put(foodData.getJSONObject(transactionDateMap.get(transactionList.getJSONObject(i))).get("food").toString(),Integer.parseInt(foodData.getJSONObject(transactionDateMap.get(transactionList.getJSONObject(i))).get("food").toString())
+//                                +Integer.parseInt(transactionList.getJSONObject(i).get("transactionAmount").toString()));
 
                       //  iter2.get("food").put(iter2.get("food")+iter.get("transactionAmount"));
                      //s   iter2.get("balance").put(iter.get("runningBalanceAmount"));
@@ -483,8 +495,8 @@ public class LoginActivity extends BaseActivity {
                         JSONObject entry = new JSONObject();
                         entry.put("timeStamp",transactionList.getJSONObject(i).get("transactionDate"));
                         transactionDateMap.put(transactionList.getJSONObject(i).get("transactionDate").toString(), counter++);
-                        entry.put("food","transactionAmount");
-                        entry.put("balance","runningBalanceAmount");
+                        entry.put("food", transactionList.getJSONObject(i).get("transactionAmount"));
+                        entry.put("balance",transactionList.getJSONObject(i).get("runningBalanceAmount"));
 
 
                         foodData.put(entry);
