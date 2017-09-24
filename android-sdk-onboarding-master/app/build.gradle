@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        useLibrary 'org.apache.http.legacy'
     }
 
     buildTypes {
@@ -34,22 +35,31 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
-    compile "org.apache.httpcomponents:httpmime:4.2.3"
-    compile 'org.apache.httpcomponents:httpclient:4.2.3'
+    compile 'org.apache.httpcomponents:httpmime:4.2.3'
+    //    compile 'org.apache.httpcomponents:httpclient:4.2.3'
+    compile 'com.squareup.okhttp3:okhttp:3.9.0'
     testCompile 'junit:junit:4.12'
-
     /**
-     * HyperTrack SDKs are shipped as @aar formats. Include the HyperTrack SDK's
-     * latest version as specified below. For detailed SDK changelog, Refer to
-     * https://docs.hypertrack.com/sdks/android/changelog.html.
+     *           HyperTrack SDKs are shipped as @aar formats. Include the HyperTrack SDK's
+     *           latest version as specified below. For detailed SDK changelog, Refer to
+     *           https://docs.hypertrack.com/sdks/android/changelog.html.
      *
-     * transitive = true, enables the SDK to include its internal dependencies
-     * automatically. Refer here for more info on HyperTrack SDK dependencies.
+     *           transitive = true, enables the SDK to include its internal dependencies
+     *           automatically. Refer here for more info on HyperTrack SDK dependencies.
      */
     compile('com.hypertrack:android:0.4.11:release@aar') {
         transitive = true;
     }
+    compile files('libs/httpcomponents-client-4.5.3/lib/commons-codec-1.9.jar')
+    compile files('libs/httpcomponents-client-4.5.3/lib/commons-logging-1.2.jar')
+    compile files('libs/httpcomponents-client-4.5.3/lib/fluent-hc-4.5.3.jar')
+    compile files('libs/httpcomponents-client-4.5.3/lib/httpclient-4.5.3.jar')
+    compile files('libs/httpcomponents-client-4.5.3/lib/httpclient-cache-4.5.3.jar')
+    compile files('libs/httpcomponents-client-4.5.3/lib/httpclient-win-4.5.3.jar')
+    compile files('libs/httpcomponents-client-4.5.3/lib/httpcore-4.4.6.jar')
+    compile files('libs/httpcomponents-client-4.5.3/lib/httpmime-4.5.3.jar')
+    compile files('libs/httpcomponents-client-4.5.3/lib/jna-4.1.0.jar')
+    compile files('libs/httpcomponents-client-4.5.3/lib/jna-platform-4.1.0.jar')
 }
