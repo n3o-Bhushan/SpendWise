@@ -318,7 +318,7 @@ public class LoginActivity extends BaseActivity {
         public static void getCitiData() throws Exception {
             final OkHttpClient client = new OkHttpClient();
             final Request request = new Request.Builder()
-                    .url("https://sandbox.apihub.citi.com/gcb/api/v2/accounts").addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4vk0jB0JFHoUUZ0ANjoAkXO_dbJWsev-rx0j7vtVKvnucu_Jl19Je9YhOxtnxTjfTuPKR44Re_V7ee8tvbGk9fRDirhXDPqLPTMSCk44dPPlajC5EcwawSE6gJDGlYy1lYzBsU3Zy7gij48QMulZQ3jZQ59VzonGch5pHy_wlc2b1RZ-DCQjtJ7g1p4tu_Nemeykj7JKGDACoipVeYB-FOg").addHeader("Accept", "application/json").addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748").addHeader("uuid","d0c7da2a-7ade-4c32-806f-f5bff5ccff09").build();
+                    .url("https://sandbox.apihub.citi.com/gcb/api/v2/accounts").addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4wSrjMeTK5eUpyW3r8z039_iMVDHQQssbKuAOtcEF4zLV0nsLPMiwm2ZJoqyXaUM2VUywBbbwKwzRc2BnBb2jlScVLq-Krz8UnM3IJtOiz6ClqCctAeL3ylhQoYlW1fNhTsRqBD2o_tORfPcdONRSLtKZuCX5b7Sb_esTHhOV3EuFTyp_GL3GmgV9gwEiRaXXOiONmICA159qV5ul1b1NFQ").addHeader("Accept", "application/json").addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748").addHeader("uuid","d0c7da2a-7ade-4c32-806f-f5bff5ccff09").build();
 
             //proxy configuration
             //request.setConfig(config);
@@ -386,7 +386,7 @@ public class LoginActivity extends BaseActivity {
             Log.d("TEST",accountId[0]);
 
             final Request request_transaction = new Request.Builder()
-                    .url("https://sandbox.apihub.citi.com/gcb/api/v2/accounts/"+accountId[0]+"/transactions?transactionStatus=ALL&requestSize=1000&transactionFromDate=2017-01-01&transactionToDate=2017-03-01").addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4vk0jB0JFHoUUZ0ANjoAkXO_dbJWsev-rx0j7vtVKvnucu_Jl19Je9YhOxtnxTjfTuPKR44Re_V7ee8tvbGk9fRDirhXDPqLPTMSCk44dPPlajC5EcwawSE6gJDGlYy1lYzBsU3Zy7gij48QMulZQ3jZQ59VzonGch5pHy_wlc2b1RZ-DCQjtJ7g1p4tu_Nemeykj7JKGDACoipVeYB-FOg").addHeader("Accept", "application/json").addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748").addHeader("uuid","d0c7da2a-7ade-4c32-806f-f5bff5ccff09").build();
+                    .url("https://sandbox.apihub.citi.com/gcb/api/v2/accounts/"+accountId[0]+"/transactions?transactionStatus=ALL&requestSize=1000&transactionFromDate=2017-01-01&transactionToDate=2017-03-01").addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4wSrjMeTK5eUpyW3r8z039_iMVDHQQssbKuAOtcEF4zLV0nsLPMiwm2ZJoqyXaUM2VUywBbbwKwzRc2BnBb2jlScVLq-Krz8UnM3IJtOiz6ClqCctAeL3ylhQoYlW1fNhTsRqBD2o_tORfPcdONRSLtKZuCX5b7Sb_esTHhOV3EuFTyp_GL3GmgV9gwEiRaXXOiONmICA159qV5ul1b1NFQ").addHeader("Accept", "application/json").addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748").addHeader("uuid","d0c7da2a-7ade-4c32-806f-f5bff5ccff09").build();
 
             //HttpGet request = new HttpGet("https://sandbox.apihub.citi.com/gcb/api/v2/accounts/"+accountId+"/transactions?transactionStatus=ALL&requestSize=1000&transactionFromDate=2017-01-01&transactionToDate=2017-03-01");
 

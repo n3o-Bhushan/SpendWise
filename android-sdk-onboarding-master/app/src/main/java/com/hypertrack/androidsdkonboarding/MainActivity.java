@@ -32,8 +32,6 @@ public class MainActivity extends BaseActivity {
 
         Log.d("LOCATION", HyperTrack.getUserId());
 
-
-
          HyperTrack.getCurrentLocation(new HyperTrackCallback() {
              @Override
              public void onSuccess(@NonNull SuccessResponse successResponse) {

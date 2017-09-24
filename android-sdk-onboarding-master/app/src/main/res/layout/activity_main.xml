@@ -29,6 +29,41 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/food"
+            android:layout_width="144dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_xxxhigh"
+            android:paddingRight="@dimen/padding_xxxhigh"
+            android:paddingTop="@dimen/padding_base"
+            android:paddingBottom="@dimen/padding_base"
+            android:textSize="@dimen/text_size_large"
+            android:gravity="center"
+            android:text="food" />
+        <Button
+            android:id="@+id/lesuire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_xxxhigh"
+            android:paddingRight="@dimen/padding_xxxhigh"
+            android:paddingTop="@dimen/padding_base"
+            android:paddingBottom="@dimen/padding_base"
+            android:textSize="@dimen/text_size_large"
+            android:gravity="center"
+            android:text="lesuire" />
+
+        <Button
+            android:id="@+id/travel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_xxxhigh"
+            android:paddingRight="@dimen/padding_xxxhigh"
+            android:paddingTop="@dimen/padding_base"
+            android:paddingBottom="@dimen/padding_base"
+            android:textSize="@dimen/text_size_large"
+            android:gravity="center"
+            android:text="travel" />
+
+        <Button
             android:id="@+id/logout_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,5 +74,6 @@
             android:textSize="@dimen/text_size_large"
             android:gravity="center"
             android:text="@string/logout_button_text" />
+
     </LinearLayout>
 </LinearLayout>
