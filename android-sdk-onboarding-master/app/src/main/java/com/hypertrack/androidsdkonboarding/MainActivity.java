@@ -2,11 +2,16 @@ package com.hypertrack.androidsdkonboarding;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.hypertrack.lib.HyperTrack;
+import com.hypertrack.lib.callbacks.HyperTrackCallback;
+import com.hypertrack.lib.models.ErrorResponse;
+import com.hypertrack.lib.models.SuccessResponse;
 
 public class MainActivity extends BaseActivity {
 
@@ -23,6 +28,29 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initUIViews() {
+        Log.d("LOCATION","inside main");
+
+        Log.d("LOCATION", HyperTrack.getUserId());
+
+
+
+         HyperTrack.getCurrentLocation(new HyperTrackCallback() {
+             @Override
+             public void onSuccess(@NonNull SuccessResponse successResponse) {
+                 Log.d("LOCATION", successResponse.toString());
+             }
+
+             @Override
+             public void onError(@NonNull ErrorResponse errorResponse) {
+
+                 Log.d("LOCATION", errorResponse.toString());
+
+             }
+         });
+
+
+
+
         // Initialize AssignAction Button
         Button logoutButton = (Button) findViewById(R.id.logout_btn);
         if (logoutButton != null)

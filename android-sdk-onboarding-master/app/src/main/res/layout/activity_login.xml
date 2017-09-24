@@ -63,33 +63,6 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:id="@+id/login.driver_login_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@color/colorPrimary"
-                    android:onClick="onLoginButtonClick"
-                    android:paddingTop="@dimen/padding_base"
-                    android:paddingBottom="@dimen/padding_base"
-                    android:orientation="vertical"
-                    android:paddingLeft="@dimen/padding_base"
-                    android:paddingRight="@dimen/padding_base">
-
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="@dimen/margin_base"
-                        android:layout_marginLeft="@dimen/margin_high"
-                        android:layout_marginRight="@dimen/margin_high"
-                        android:layout_marginTop="@dimen/margin_base"
-                        android:gravity="center"
-                        android:text="@string/login_button_text"
-                        android:textAllCaps="true"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/text_size_medium" />
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/login_btn_loader"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -107,5 +80,32 @@
                         android:progressTint="#FFFFFF" />
                 </LinearLayout>
             </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/login.driver_login_btn"
+            android:layout_width="85dp"
+            android:layout_height="106dp"
+            android:background="@color/colorPrimary"
+            android:onClick="onLoginButtonClick"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/padding_base"
+            android:paddingLeft="@dimen/padding_base"
+            android:paddingRight="@dimen/padding_base"
+            android:paddingTop="@dimen/padding_base">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/margin_base"
+                android:layout_marginLeft="@dimen/margin_high"
+                android:layout_marginRight="@dimen/margin_high"
+                android:layout_marginTop="@dimen/margin_base"
+                android:gravity="center"
+                android:text="@string/login_button_text"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size_medium" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
