@@ -268,6 +268,7 @@ public class LoginActivity extends BaseActivity {
             request.addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4Iu84h6A-eXyyGKgGvvUAvC5HDlV7ue_tcIXd_Z5x6HjUCofZLMRhgXmnSYi9tH7w8zeZzGsFxe_6uwyNPc2TACk9lbesHcOXDbox91GoXkV0YihcJaXe9vTHXN7yyjPiGlxo86a02hRWBZtDjoQ0FjSomZdwEwgZkex8BN2kgrb8OyMjs50hiHHIGm4MgAw0lo5oiscoop9EN2vO4RF_-Q");
             request.addHeader("Accept", "application/json");
             request.addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748");
+            request.addHeader("uuid","4c4a2900-71f5-4209-bd44-dc74d1f3890f");
 
 
 
