@@ -25,6 +25,7 @@ android {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/DEPENDENCIES'
+        exclude ''
     }
 }
 
@@ -69,4 +70,14 @@ dependencies {
     compile files('libs/httpcomponents-client-4.5.3/lib/httpmime-4.5.3.jar')
     compile files('libs/httpcomponents-client-4.5.3/lib/jna-4.1.0.jar')
     compile files('libs/httpcomponents-client-4.5.3/lib/jna-platform-4.1.0.jar')
+    // https://mvnrepository.com/artifact/com.squareup.retrofit/retrofit
+  //  compile group: 'com.squareup.retrofit', name: 'retrofit', version: '1.9.0'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+
+
+ //   compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
+  //  compile 'com.squareup.okhttp:okhttp:2.4.0'
+
 }

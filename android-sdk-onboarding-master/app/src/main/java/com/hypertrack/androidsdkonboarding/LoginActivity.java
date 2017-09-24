@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -17,6 +18,7 @@ import com.hypertrack.lib.callbacks.HyperTrackCallback;
 import com.hypertrack.lib.models.ErrorResponse;
 import com.hypertrack.lib.models.SuccessResponse;
 import com.hypertrack.lib.models.User;
+
 
 
 ///Vimanyu///
@@ -35,6 +37,19 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.apache.http.entity.StringEntity;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import static android.R.id.message;
 
 
 public class LoginActivity extends BaseActivity {
@@ -88,6 +103,11 @@ public class LoginActivity extends BaseActivity {
     public void onLoginButtonClick(View view) {
         // Check if Location Settings are enabled, if yes then attempt
         // DriverLogin
+        try {
+            getCitiData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         checkForLocationSettings();
     }
 
@@ -260,23 +280,24 @@ public class LoginActivity extends BaseActivity {
             //HttpHost proxy = new HttpHost("proxy.xxxx.com", 8080, "http");
             //RequestConfig config = RequestConfig.custom().setProxy(proxy).build();
 
-            HttpGet request = new HttpGet("https://sandbox.apihub.citi.com/gcb/api/v2/accounts?nextStartindex={replace with nextStartindex}");
+            HttpGet request = new HttpGet("https://sandbox.apihub.citi.com/gcb/api/v2/accounts");
 
             //proxy configuration
             //request.setConfig(config);
             // Header parameters  addition
-            request.addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4Iu84h6A-eXyyGKgGvvUAvC5HDlV7ue_tcIXd_Z5x6HjUCofZLMRhgXmnSYi9tH7w8zeZzGsFxe_6uwyNPc2TACk9lbesHcOXDbox91GoXkV0YihcJaXe9vTHXN7yyjPiGlxo86a02hRWBZtDjoQ0FjSomZdwEwgZkex8BN2kgrb8OyMjs50hiHHIGm4MgAw0lo5oiscoop9EN2vO4RF_-Q");
+            request.addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4Vy96H0EAYtJSb9z8-xbxPs70NxFyp0UpVoh7mhstt47mKXqXRlRt0uUKpJb3hryMdBvCS25QXFnymZ90t-oswm-8fDppZqr_wSOmaump1eYeFCeNErfD1hSAfvc5qR7MxmFkd6HmmoJTHugZ7sbm4tFg4OHG8PIrA97gss4zD5xX4YaalKUJU1nAJN7m7sl-4H5VDEX9wyYlPLAL7IVvhg");
             request.addHeader("Accept", "application/json");
             request.addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748");
-            request.addHeader("uuid","4c4a2900-71f5-4209-bd44-dc74d1f3890f");
+         //   request.addHeader("uuid","4c4a2900-71f5-4209-bd44-dc74d1f3890f");
 
+            request.addHeader("uuid","d0c7da2a-7ade-4c32-806f-f5bff5ccff09");
 
-
-            System.out.println("Executing request " + request.getRequestLine());
+         //   System.out.println("Executing request " + request.getRequestLine());
             response = httpClient.execute(request);
-            System.out.println("----------------------------------------");
-            System.out.println(response.getStatusLine());
-            System.out.println(EntityUtils.toString(response.getEntity()));
+        //    System.out.println("----------------------------------------");
+         //   System.out.println(response.getStatusLine());
+
+         //   System.out.println(EntityUtils.toString(response.getEntity()));
         }
         catch(Exception e){
             e.printStackTrace();
@@ -290,5 +311,81 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-}
+
+
+        public static void getCitiData() throws Exception {
+            final OkHttpClient client = new OkHttpClient();
+            final Request request = new Request.Builder()
+                    .url("https://sandbox.apihub.citi.com/gcb/api/v2/accounts").addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4jGSpN1Jjr2CeafOQJmQvPLdYgmwUc28GLNpKN8-P7m1Pr1dmvoD7uz4tzvUYecezaSxFqIrrfqHkw36OebGsE3JVI_EBlbIAH4E1JuvDIN2wizn-wUEztnQ4BEt8-IujrQJXRn6uZlJI3SKEiVz6J6qc9JBnApbYCaK7gM_-OldA25jEA3Q6xQzIkJvKr6op_tk4LmONnmKnFff8yStuNw").addHeader("Accept", "application/json").addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748").addHeader("uuid","d0c7da2a-7ade-4c32-806f-f5bff5ccff09").build();
+
+            //proxy configuration
+            //request.setConfig(config);
+            // Header parameters  addition
+        //    request.addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ4Iu84h6A-eXyyGKgGvvUAvC5HDlV7ue_tcIXd_Z5x6HjUCofZLMRhgXmnSYi9tH7w8zeZzGsFxe_6uwyNPc2TACk9lbesHcOXDbox91GoXkV0YihcJaXe9vTHXN7yyjPiGlxo86a02hRWBZtDjoQ0FjSomZdwEwgZkex8BN2kgrb8OyMjs50hiHHIGm4MgAw0lo5oiscoop9EN2vO4RF_-Q");
+          //  request.addHeader("Accept", "application/json");
+            //request.addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748");
+            //   request.addHeader("uuid","4c4a2900-71f5-4209-bd44-dc74d1f3890f");
+
+          //  request.addHeader("uuid","d0c7da2a-7ade-4c32-806f-f5bff5ccff09");
+
+            final String[] resp = {""};
+
+            Log.d("wadded", "Begining");
+
+            final JSONObject[] Jobject = new JSONObject[1];
+            final JSONArray[] Jarray = {null};
+            final Boolean[] flag = {false};
+            final String[] accountId = {""};
+            client.newCall(request).enqueue( new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+
+                        resp[0] =response.body().string();
+                 //   System.out.print("***************************");
+                    Log.d("wadded", "*********************************");
+                    Log.d("wadded", resp[0]);
+                    try {
+                     //   Jobject[0] = new JSONObject(resp[0]);
+                    //    Jarray[0] = Jobject[0].getJSONArray("accountGroupSummary");
+
+                        JSONObject Jobject = new JSONObject(resp[0]);
+                        JSONArray Jarray = Jobject.getJSONArray("accountGroupSummary");
+
+                        JSONObject object     = Jarray.getJSONObject(0);
+                        JSONArray Jarray1 = object.getJSONArray("creditCardAccountsSummary");
+                        JSONObject object1     = Jarray1.getJSONObject(0);
+
+
+
+                        Log.d("wadded", "*****************JSONOBJ****************");
+                        accountId[0] = object1.get("accountId").toString();
+                        Log.d("wadded", accountId[0]);
+                        flag[0] =true;
+
+
+                        } catch (JSONException e1) {
+                        e1.printStackTrace();
+                    }
+
+                }
+
+            }
+            );
+
+
+            while(flag[0]==false){
+                //do nothing
+            }
+            Log.d("TEST",accountId[0]);
+             }
+
+        }
+
+
+
 
