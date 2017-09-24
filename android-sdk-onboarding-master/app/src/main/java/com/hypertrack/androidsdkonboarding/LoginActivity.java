@@ -18,9 +18,24 @@ import com.hypertrack.lib.models.ErrorResponse;
 import com.hypertrack.lib.models.SuccessResponse;
 import com.hypertrack.lib.models.User;
 
-/**
- * Created by piyush on 08/05/17.
- */
+
+///Vimanyu///
+import org.apache.http.HttpHost;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+import org.apache.http.entity.StringEntity;
+
 
 public class LoginActivity extends BaseActivity {
 
@@ -233,4 +248,46 @@ public class LoginActivity extends BaseActivity {
             }
         }
     }
+
+    public void CitiAuth()throws Exception {
+
+        CloseableHttpClient httpClient = null;
+
+        CloseableHttpResponse response = null;
+        try {
+            httpClient = HttpClients.custom().setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE).build();
+            //proxy configuration
+            //HttpHost proxy = new HttpHost("proxy.xxxx.com", 8080, "http");
+            //RequestConfig config = RequestConfig.custom().setProxy(proxy).build();
+
+            HttpGet request = new HttpGet("https://sandbox.apihub.citi.com/gcb/api/v2/accounts?nextStartindex={replace with nextStartindex}");
+
+            //proxy configuration
+            //request.setConfig(config);
+            // Header parameters  addition
+            request.addHeader("Authorization", "Bearer AAEkODMwN2RhYjctZjQxYS00MWU0LWI0ZGMtZWQ5NDk1NzgwNzQ42yltRnydE-6THSuhNezlqCqq0dYlBzUWcadJ5J-iJnz3pFNZVvXN_4LSt2gqjxT-vrKGRvGOLB-gexOhe_jgqykdRTWavcIUDLG6v35r5IYVtSQG2spAnKHLrkZ_2UmkKan8RjUuug73C7YztKoOAhtQZB5f3IOWLIgSHt06jXvsUku59eSO05A8zrEbyBdLAfFGPZtjPcnZSb9sOE7olw");
+            request.addHeader("Accept", "application/json");
+            request.addHeader("client_id", "8307dab7-f41a-41e4-b4dc-ed9495780748");
+
+
+
+            System.out.println("Executing request " + request.getRequestLine());
+            response = httpClient.execute(request);
+            System.out.println("----------------------------------------");
+            System.out.println(response.getStatusLine());
+            System.out.println(EntityUtils.toString(response.getEntity()));
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        } finally {
+            if (response != null) {
+                response.close();
+            }
+            if (httpClient != null) {
+                httpClient.close();
+            }
+        }
+    }
+
 }
+
